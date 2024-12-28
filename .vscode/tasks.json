@@ -1,21 +1,22 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-      {
-        "label": "Build C Program",
-        "type": "shell",
-        "command": "cl",
-        "args": [
-          "/Fe:client.exe", // Output executable name
-          "client.c",       // Input source file
-          "-lws2_32"        // Link Winsock library for networking
-        ],
-        "group": {
-          "kind": "build",
-          "isDefault": true
-        },
-        "problemMatcher": ["$gcc"]
-      }
-    ]
-  }
-  
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build with MSVC",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/C",
+        "cl /I\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.42.34433\\include\" client.c /Fe:client.exe /link /LIBPATH:\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.42.34433\\lib\\x64\" ws2_32.lib"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$msCompile"]
+    }
+  ]
+}
+
+// to compile:
+cl /I"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.42.34433\include" /MT client.c /Fe:client.exe /link /LIBPATH:"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.42.34433\lib\x64" ws2_32.lib advapi32.lib /machine:x64
